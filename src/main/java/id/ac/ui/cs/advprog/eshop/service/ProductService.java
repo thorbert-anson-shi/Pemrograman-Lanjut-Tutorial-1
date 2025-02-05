@@ -5,6 +5,6 @@ import id.ac.ui.cs.advprog.eshop.model.Product;
 import java.util.Iterator;
 
 public interface ProductService {
-    public Product create(Product product);
-    public Iterator<Product> findAll();
+    Product create(Product product);
+    Iterator<Product> findAll();
 }
