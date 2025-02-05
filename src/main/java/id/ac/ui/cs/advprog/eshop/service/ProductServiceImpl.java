@@ -5,7 +5,9 @@ import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -19,7 +21,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Iterator<Product> findAll() {
-        return productRepository.findAll();
+    public List<Product> findAll() {
+        Iterator<Product> productIterator = productRepository.findAll();
+        List<Product> allProducts = new ArrayList<Product>();
+        productIterator.forEachRemaining(allProducts::add);
+        return allProducts;
     }
 }
