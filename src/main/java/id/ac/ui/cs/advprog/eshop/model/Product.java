@@ -6,11 +6,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 
 @Getter @Setter
 public class Product {
     @NotNull
-    private String productId;
+    private String productId = UUID.randomUUID().toString();
 
     @NotBlank(message="Product name cannot be empty")
     private String productName;
