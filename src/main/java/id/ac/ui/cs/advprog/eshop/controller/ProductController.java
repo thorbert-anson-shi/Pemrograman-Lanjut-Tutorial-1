@@ -2,12 +2,10 @@ package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -21,14 +19,35 @@ public class ProductController {
     @GetMapping("/create")
     public String createProductPage(Model model) {
         Product product = new Product();
+        model.addAttribute("isEditMode", false);
         model.addAttribute("product", product);
         return "createProduct";
     }
 
     @PostMapping("/create")
-    public String createProductPost(@ModelAttribute Product product, Model model) {
+    public String createProductPost(@Valid Product product, Model model) {
         productService.create(product);
         return "redirect:list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editProductPage(@PathVariable String id, Model model) {
+        Product toBeEdited = productService.findById(id);
+        model.addAttribute("isEditMode", true);
+        model.addAttribute("product", toBeEdited);
+        return "createProduct";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editProductPost(@Valid Product product, @PathVariable String id) {
+        productService.edit(id, product);
+        return "redirect:../list";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteProductPost(@PathVariable String id) {
+        productService.delete(id);
+        return "redirect:../list";
     }
 
     @GetMapping("/list")
