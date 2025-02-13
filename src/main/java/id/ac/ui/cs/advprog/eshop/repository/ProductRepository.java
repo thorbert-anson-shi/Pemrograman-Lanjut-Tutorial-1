@@ -17,22 +17,26 @@ public class ProductRepository {
     }
 
     public boolean delete(String id) {
-        Product toBeDeleted = productData.stream().filter(product -> product.getProductId().equals(id)).findFirst()
-                .orElse(null);
+        Product toBeDeleted = getProductById(id);
         return productData.remove(toBeDeleted);
     }
 
-    public Product edit(String id, Product editedProduct) {
-        Product toBeEdited = productData.stream().filter(product -> product.getProductId().equals(id)).findFirst()
-                .orElse(null);
+    public Product edit(String id, Product editedProduct) throws ProductNotFoundException {
+        Product toBeEdited = getProductById(id);
         return productData.set(productData.indexOf(toBeEdited), editedProduct);
     }
 
-    public Product get(String id) {
-        return productData.stream().filter(product -> product.getProductId().equals(id)).findFirst().orElse(null);
+    public Product getProductById(String id) throws ProductNotFoundException {
+        return productData.stream().filter(product -> product.getProductId().equals(id)).findFirst().orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     public Iterator<Product> findAll() {
         return productData.iterator();
+    }
+
+    public static class ProductNotFoundException extends RuntimeException {
+        public ProductNotFoundException(String productId) {
+            super(String.format("Product with id %s not found", productId));
+        }
     }
 }

@@ -3,6 +3,8 @@ package id.ac.ui.cs.advprog.eshop.controller;
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
+import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +27,12 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public String createProductPost(@Valid Product product, Model model) {
-        productService.create(product);
+    public String createProductPost(@Valid Product product, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException(bindingResult.getFieldErrors().getFirst().getDefaultMessage());
+        } else {
+            productService.create(product);
+        }
         return "redirect:list";
     }
 
@@ -39,8 +45,12 @@ public class ProductController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editProductPost(@Valid Product product, @PathVariable String id) {
-        productService.edit(id, product);
+    public String editProductPost(@Valid Product product, BindingResult bindingResult, @PathVariable String id) {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException(bindingResult.getFieldErrors().getFirst().getDefaultMessage());
+        } else {
+            productService.edit(id, product);
+        }
         return "redirect:../list";
     }
 

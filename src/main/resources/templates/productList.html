@@ -39,13 +39,13 @@
 
             <td>
               <a th:href="@{/product/edit/{id}(id=${product.getProductId()})}">
-                <button>Edit</button>
+                <button class="btn btn-secondary">Edit</button>
               </a>
               <form
                 th:action="@{/product/delete/{id}(id=${product.getProductId()})}"
                 method="post"
               >
-                <button>Delete</button>
+                <button class="btn btn-danger">Delete</button>
               </form>
             </td>
           </tr>
