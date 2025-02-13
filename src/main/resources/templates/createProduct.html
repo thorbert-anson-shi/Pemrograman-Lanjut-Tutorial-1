@@ -2,23 +2,29 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
 
-    <title th:text="${isEditMode} ? 'Edit existing product' : 'Create new product'"></title>
+    <title
+      th:text="${isEditMode} ? 'Edit existing product' : 'Create new product'"
+    ></title>
 
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
-    >
+    />
   </head>
 
   <body>
-    <div class="container" th:object="${product}">
+    <div class="container">
       <h3 th:text="${isEditMode} ? 'Edit product' : 'Create product'"></h3>
 
-      <form method="post" th:action="(${isEditMode} ? @{/product/edit/{id}(id=${product.getProductId()})} : @{/product/create})">
+      <form
+        method="post"
+        th:object="${product}"
+        th:action="(${isEditMode} ? @{/product/edit/{id}(id=${product.getProductId()})} : @{/product/create})"
+      >
         <div class="form-group">
           <label for="nameInput">Name</label>
 
@@ -28,7 +34,7 @@
             class="form-control mb-4 col-4"
             id="nameInput"
             placeholder="Enter product' name"
-          >
+          />
         </div>
 
         <div class="form-group">
@@ -39,8 +45,8 @@
             type="text"
             class="form-control mb-4 col-4"
             id="quantityInput"
-            placeholder="Enter product' name"
-          >
+            placeholder="Enter product name"
+          />
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

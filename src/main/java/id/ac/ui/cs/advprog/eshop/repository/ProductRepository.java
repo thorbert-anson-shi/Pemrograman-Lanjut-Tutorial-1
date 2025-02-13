@@ -17,11 +17,14 @@ public class ProductRepository {
     }
 
     public boolean delete(String id) {
-        return true;
+        Product toBeDeleted = productData.stream().filter(product -> product.getProductId().equals(id)).findFirst()
+                .orElse(null);
+        return productData.remove(toBeDeleted);
     }
 
     public Product edit(String id, Product editedProduct) {
-        Product toBeEdited = productData.stream().filter(product -> product.getProductId().equals(id)).findFirst().orElse(null);
+        Product toBeEdited = productData.stream().filter(product -> product.getProductId().equals(id)).findFirst()
+                .orElse(null);
         return productData.set(productData.indexOf(toBeEdited), editedProduct);
     }
 
