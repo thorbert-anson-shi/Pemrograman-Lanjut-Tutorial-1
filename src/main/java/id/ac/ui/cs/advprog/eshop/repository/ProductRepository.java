@@ -16,7 +16,7 @@ public class ProductRepository {
         return product;
     }
 
-    public boolean delete(String id) {
+    public boolean delete(String id) throws ProductNotFoundException {
         Product toBeDeleted = getProductById(id);
         return productData.remove(toBeDeleted);
     }
