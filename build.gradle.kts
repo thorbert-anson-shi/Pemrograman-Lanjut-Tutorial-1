@@ -41,6 +41,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+
 tasks.register<Test>("unitTest") {
     description = "Runs unit tests."
     group = "verification"
@@ -63,3 +64,14 @@ tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
+tasks.test {
+    filter {
+        excludeTestsMatching("*FunctionalTest")
+    }
+
+    finalizedBy(tasks.jacocoTestReport);
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test);
+}
