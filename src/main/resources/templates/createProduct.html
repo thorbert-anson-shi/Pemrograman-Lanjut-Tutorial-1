@@ -18,7 +18,7 @@
 
 <body>
 <div class="container">
-    <h3 th:text="${isEditMode} ? 'Edit product' : 'Create product'"></h3>
+    <h3 th:text="${isEditMode} ? 'Edit product' : 'Create product'" aria-label="${isEditMode} ? 'Edit product' : 'Create product'">Create product</h3>
 
     <form
             method="post"

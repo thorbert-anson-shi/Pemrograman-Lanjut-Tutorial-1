@@ -12,10 +12,13 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    String errorTemplate = "error";
+    String errorMessageField = "errorMessage";
+
     @ExceptionHandler(ProductNotFoundException.class)
     public String handleProductNotFound(ProductNotFoundException ex, Model model) {
-        model.addAttribute("errorMessage", ex.getMessage());
-        return "error";
+        model.addAttribute(errorMessageField, ex.getMessage());
+        return errorTemplate;
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -27,13 +30,13 @@ public class GlobalExceptionHandler {
             errorMessage = errors.getFirst().getDefaultMessage();
         }
 
-        model.addAttribute("errorMessage", errorMessage);
-        return "error";
+        model.addAttribute(errorMessageField, errorMessage);
+        return errorTemplate;
     }
 
     @ExceptionHandler(Exception.class)
     public String handleGenericException(Exception ex, Model model) {
-        model.addAttribute("errorMessage", "An unexpected error occurred: " + ex.getMessage());
-        return "error";
+        model.addAttribute(errorMessageField, "An unexpected error occurred: " + ex.getMessage());
+        return errorTemplate;
     }
 }
