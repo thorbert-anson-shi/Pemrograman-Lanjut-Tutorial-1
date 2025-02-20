@@ -2,7 +2,7 @@ FROM eclipse-temurin:23-jdk-alpine as builder
 
 WORKDIR /src/eshop
 COPY . .
-RUN ./gradlew clean bootJar
+RUN chmod +x && ./gradlew clean bootJar
 
 FROM eclipse-temurin:23-jre-alpine as runner
 
