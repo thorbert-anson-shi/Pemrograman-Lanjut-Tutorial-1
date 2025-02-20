@@ -1,10 +1,10 @@
-FROM eclipse-temurin:23-jdk-alpine as builder
+FROM eclipse-temurin:21-jdk-alpine as builder
 
 WORKDIR /src/eshop
 COPY . .
 RUN chmod +x ./gradlew && ./gradlew clean bootJar
 
-FROM eclipse-temurin:23-jre-alpine as runner
+FROM eclipse-temurin:21-jre-alpine as runner
 
 ARG USER_NAME=eshop
 ARG USER_UID=1000
