@@ -18,10 +18,6 @@ class ProductRepositoryTest {
     @InjectMocks
     ProductRepository productRepository;
 
-    @BeforeEach
-    void setup() {
-    }
-
     @Test
     void testCreateAndFind() {
         Product product = new Product();

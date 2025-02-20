@@ -33,10 +33,6 @@ class ProductControllerTest {
     @InjectMocks
     private ProductController productController;
 
-    @BeforeEach
-    void setup() {
-    }
-
     @Test
     void testCreateProductPage() {
         String viewName = productController.createProductPage(model);
