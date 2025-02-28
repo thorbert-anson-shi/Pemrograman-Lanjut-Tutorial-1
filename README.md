@@ -81,3 +81,15 @@ Check out the application deployed on Koyeb [here](https://corresponding-shaylah
    and integrate changes to the code while making sure that code quality is maintained by using the provided code
    scanning tools. For CD, the platform itself (Koyeb), provides auto-deploy on-push features that allow automated
    deployment of the application as updates are made to the codebase.
+
+# Module 3
+
+## Reflection
+
+1. My project attempts to best follow SOLID principles. It adheres to the Single Responsibility Principle (SRP) by ensuring each class has a well-defined role—controllers handle HTTP requests, services contain business logic, and repositories manage data access. Furthermore, I've separated the controllers into view controllers and API controllers for more granulated separation of concern. Additionally, the Interface Segregation Principle (ISP) ensures that each interface defines only the necessary methods, preventing unnecessary dependencies.
+
+   At this point in the project, the Liskov Substitution Principle doesn't really need to hold, as subtyping still isn't happening frequently if at all (no interfaces seem to be related in any meaningful way). Meanwhile, the Dependency Inversion Principle (DIP) is applied by making controllers depend on interfaces rather than concrete implementations. This is achieved through injection of the necessary dependencies, reducing tight coupling and improving flexibility.
+
+2. Generally, applying SOLID principles when building an application improves maintainability, scalability, and flexibility in the long run. For example, the Single Responsibility Principle (SRP) ensures that `CarServiceImpl` only manages car-related operations, making debugging and updates to a particular component easier. The Open-Closed Principle (OCP) allows adding new features, like a `BikeServiceImpl`, without modifying existing services, instead utilizing the common contract (interface) shared by `BikeService` and `CarService` to ensure compatibility. Dependency Inversion Principle (DIP) enables flexible dependency injection with, making unit testing easier by allowing mock dependencies. These principles promote clean architecture, reducing bugs and simplifying future modifications.
+
+3. Ignoring SOLID leads to rigid and tightly coupled code, making modifications difficult. For example, if `CarController` directly instantiated `CarServiceImpl` instead of depending on an interface, replacing or extending functionalities would require modifying both. Without SRP, mixing database logic inside controllers would make them harder to understand, test, and maintain. Ignoring Liskov Substitution Principle (LSP) (e.g., forcing `CarController` to extend `ProductController`) could break existing functionality when substitutions fail. Tightly coupled and unstructured code increases technical debt, making the project difficult to scale or refactor. In the long run, this results in higher maintenance costs and more bugs.
