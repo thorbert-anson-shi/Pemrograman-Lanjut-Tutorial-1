@@ -3,6 +3,7 @@ package id.ac.ui.cs.advprog.eshop.repository;
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.repository.OrderRepository.OrderNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -70,8 +71,7 @@ public class OrderRepositoryTest {
     void testFindByIdNotFound() {
         orders.forEach(order -> orderRepository.save(order));
 
-        Order findResult = orderRepository.findById("zczc");
-        assertThrows(OrderNotFoundException.class);
+        assertThrows(OrderNotFoundException.class, () -> orderRepository.findById("zczc"));
     }
 
     @Test

@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.handlers;
 
+import id.ac.ui.cs.advprog.eshop.repository.OrderRepository.OrderNotFoundException;
 import id.ac.ui.cs.advprog.eshop.repository.ProductRepository.ProductNotFoundException;
 import org.springframework.ui.Model;
 import org.springframework.validation.ObjectError;
@@ -31,6 +32,12 @@ public class GlobalExceptionHandler {
         }
 
         model.addAttribute(errorMessageField, errorMessage);
+        return errorTemplate;
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public String handleOrderNotFound(OrderNotFoundException ex, Model model) {
+        model.addAttribute(errorMessageField, ex.getMessage());
         return errorTemplate;
     }
 
