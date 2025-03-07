@@ -93,3 +93,30 @@ Check out the application deployed on Koyeb [here](https://corresponding-shaylah
 2. Generally, applying SOLID principles when building an application improves maintainability, scalability, and flexibility in the long run. For example, the Single Responsibility Principle (SRP) ensures that `CarServiceImpl` only manages car-related operations, making debugging and updates to a particular component easier. The Open-Closed Principle (OCP) allows adding new features, like a `BikeServiceImpl`, without modifying existing services, instead utilizing the common contract (interface) shared by `BikeService` and `CarService` to ensure compatibility. Dependency Inversion Principle (DIP) enables flexible dependency injection with, making unit testing easier by allowing mock dependencies. These principles promote clean architecture, reducing bugs and simplifying future modifications.
 
 3. Ignoring SOLID leads to rigid and tightly coupled code, making modifications difficult. For example, if `CarController` directly instantiated `CarServiceImpl` instead of depending on an interface, replacing or extending functionalities would require modifying multiple files. Without SRP, mixing database logic inside controllers would make them harder to understand, test, and maintain. Ignoring Liskov Substitution Principle (LSP) (e.g., forcing `CarController` to extend `ProductController`) could break existing functionality when substitutions fail. Tightly coupled and unstructured code increases technical debt, making the project difficult to scale or refactor. In the long run, this results in higher maintenance costs and more bugs.
+
+# Module 4
+
+## Reflection
+
+1. I believe this work flow is effective for testing and implementing functionality while writing programs. It keeps the tests small and manageable as to not overwhelm the implementation stage. It also allows additional tests to be implemented in the future. However, I find it difficult to plan everything concretely from the beginning, which is where TDD becomes difficult. If during the GREEN stage an unforeseen issue is found, then the tests would have to be modified in order to accommodate those changes.
+2. The following is my evaluation of the coherence of the tests to the FIRST principle:
+
+   #### Fast 
+       
+       The tests are relatively fast as they mock dependencies (e.g., orderRepository).
+   
+   #### Independent 
+   
+       Each test is isolated and does not depend on other tests.
+   
+   #### Repeatable 
+   
+       Tests are repeatable since they use predefined inputs and mocked outputs.
+   
+   #### Self-validating
+   
+       Assertions (assertEquals, assertNull, assertThrows) make the tests self-validating.
+   
+   #### Timely
+   
+       Some tests were written before full implementation, but test-driven corrections could be improved by refining the implementation sooner.
